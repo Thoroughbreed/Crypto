@@ -1,0 +1,15 @@
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.csproj.AssemblyReference.cache
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.GeneratedMSBuildEditorConfig.editorconfig
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.AssemblyInfoInputs.cache
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.AssemblyInfo.cs
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.csproj.CoreCompileInputs.cache
+/Users/janandreasen/Projects/Crypto/AESEncryption/bin/Debug/net6.0/AESEncryption
+/Users/janandreasen/Projects/Crypto/AESEncryption/bin/Debug/net6.0/AESEncryption.deps.json
+/Users/janandreasen/Projects/Crypto/AESEncryption/bin/Debug/net6.0/AESEncryption.runtimeconfig.json
+/Users/janandreasen/Projects/Crypto/AESEncryption/bin/Debug/net6.0/AESEncryption.dll
+/Users/janandreasen/Projects/Crypto/AESEncryption/bin/Debug/net6.0/ref/AESEncryption.dll
+/Users/janandreasen/Projects/Crypto/AESEncryption/bin/Debug/net6.0/AESEncryption.pdb
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.dll
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/ref/AESEncryption.dll
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.pdb
+/Users/janandreasen/Projects/Crypto/AESEncryption/obj/Debug/net6.0/AESEncryption.genruntimeconfig.cache
