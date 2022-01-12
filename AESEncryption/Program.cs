@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Crypto
@@ -12,30 +13,39 @@ namespace Crypto
             var iv = crypto.GenerateRandomNumber(16);
             const string original = "Encrypto-testo!";
 
-            var encrypted = crypto.Crypto(Encoding.UTF8.GetBytes(original), key, iv, true);
-            var decrypted = crypto.Crypto(encrypted, key, iv, false);
+            Console.WriteLine("Lets try to encrypt!");
+            var result = Encrypt(original, key, iv, crypto);
+            foreach (var VARIABLE in result)
+            {
+                Console.WriteLine(VARIABLE);
+            }
 
-            var decryptedMessage = Encoding.UTF8.GetString(decrypted);
+            Console.WriteLine("Lets try to decrypt then...");
+            var print = Decrypt(
+                "C7jKInp7Qmc99Gep3YLsQZnT/js/qnXRbFldAPTQDCk=",
+                "8X7durkBX/De6ASyPFYV6Q==",
+                "TVcDK8KUr6af1YQJXQeLog==",
+                crypto);
+            Console.WriteLine(print);
+        }
 
-            Console.WriteLine("AES Encryption Demonstration in .NET");
-            Console.WriteLine("------------------------------------");
-            Console.WriteLine();
-            Console.WriteLine("Key = " + Convert.ToBase64String(key));
-            Console.WriteLine("IV = " + Convert.ToBase64String(iv));
-            Console.WriteLine("Original Text = " + original);
-            Console.WriteLine("Encrypted Text = " + Convert.ToBase64String(encrypted));
-            Console.WriteLine("Decrypted Text = " + decryptedMessage);
-            Console.WriteLine();
-            Console.WriteLine("------------------------------------");
-            Console.WriteLine("Please enter key: ");
-            var keyInput = Convert.FromBase64String(Console.ReadLine());
-            Console.WriteLine("Please enter initialization vector: ");
-            var ivInput = Convert.FromBase64String(Console.ReadLine());
-            Console.WriteLine("Please enter encrypted message: ");
-            var encryptedMsg = Convert.FromBase64String(Console.ReadLine());
-            decrypted = crypto.Crypto(encryptedMsg, keyInput, ivInput);
-            Console.WriteLine("Your secret message was:");
-            Console.WriteLine(Encoding.UTF8.GetString(decrypted));
+        static string[] Encrypt(string data, byte[] key, byte[] iv,CryptoClass c)
+        {
+            string[] result = {
+                                    Convert.ToBase64String(key),
+                                    Convert.ToBase64String(iv),
+                                    Convert.ToBase64String(c.Crypto(Encoding.UTF8.GetBytes(data), key, iv, true))
+                                };
+            return result;
+        }
+
+        static string Decrypt(string key, string iv, string text, CryptoClass c)
+        {
+            var t = Convert.FromBase64String(text);
+            var k = Convert.FromBase64String(key);
+            var i = Convert.FromBase64String(iv);
+            var decryptedData = c.Crypto(t,k, i);
+            return Encoding.UTF8.GetString(decryptedData);
         }
     }
 }
