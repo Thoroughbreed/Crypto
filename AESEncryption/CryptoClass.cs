@@ -113,7 +113,8 @@ namespace Crypto
                     string[] split = password.Split("\t");
                     try
                     {
-                        _passwords.Add(new Password(split[0], split[1], split[2]));
+                        // _passwords.Add(new Password(split[0], split[1], split[2]));
+                        _passwords.Add(new Password(split[0], split[1], split[1]));
                     }
                     catch (Exception e)
                     { }
