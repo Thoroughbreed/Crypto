@@ -28,12 +28,8 @@ namespace Crypto.UTIL
                 File.WriteAllText(PassFile, writeMsg);
                 foreach (var pw in passwords)
                 {
-<<<<<<< HEAD
-                    writeMsg = $"{pw.hint}\t{pw.password}\n";
-=======
                     writeMsg = $"{pw.hint}X{pw.username}X{pw.password}\n";
->>>>>>> dev
-                    File.AppendAllTextAsync(PassFile,writeMsg);
+                    File.AppendAllText(PassFile,writeMsg);
                 }
             }
         }
