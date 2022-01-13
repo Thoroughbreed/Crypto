@@ -22,7 +22,7 @@ namespace Crypto.UTIL
                 File.WriteAllText(PassFile, writeMsg);
                 foreach (var pw in passwords)
                 {
-                    writeMsg = $"{pw.hint}\t{pw.username}\t{pw.password}\n";
+                    writeMsg = $"{pw.hint}X{pw.username}X{pw.password}\n";
                     File.AppendAllTextAsync(PassFile,writeMsg);
                 }
             }

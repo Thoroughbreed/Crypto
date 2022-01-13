@@ -80,7 +80,17 @@ namespace Crypto
         {
             if (!string.IsNullOrEmpty(hint) || !string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
             {
-                _passwords.Add(new Password(Encrypt(hint)[2], Encrypt(username)[2], Encrypt(password)[2]));
+                
+                var h = Crypto(Encoding.UTF8.GetBytes(hint),
+                    Convert.FromHexString(_unlockKey),
+                    Convert.FromHexString(_iv), true);
+                var u = Crypto(Encoding.UTF8.GetBytes(username),
+                    Convert.FromHexString(_unlockKey),
+                    Convert.FromHexString(_iv), true);
+                var p = Crypto(Encoding.UTF8.GetBytes(password),
+                    Convert.FromHexString(_unlockKey),
+                    Convert.FromHexString(_iv), true);
+                _passwords.Add(new Password(Convert.ToHexString(h), Convert.ToHexString(u), Convert.ToHexString(p)));
                 SaveToFile();
             }
         }
@@ -110,14 +120,17 @@ namespace Crypto
             {
                 foreach (var password in pwHashes)
                 {
-                    string[] split = password.Split("\t");
+                    string[] split = password.Split("X");
                     try
                     {
-                        // _passwords.Add(new Password(split[0], split[1], split[2]));
-                        _passwords.Add(new Password(split[0], split[1], split[1]));
+                        _passwords.Add(new Password(split[0], split[1], split[2]));
+                        // _passwords.Add(new Password(split[0], split[1], split[1]));
                     }
                     catch (Exception e)
-                    { }
+                    {
+                        Console.WriteLine("WTF?!");
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
         }
