@@ -29,7 +29,7 @@ namespace Crypto.UTIL
                 foreach (var pw in passwords)
                 {
                     writeMsg = $"{pw.hint}X{pw.username}X{pw.password}\n";
-                    File.AppendAllTextAsync(PassFile,writeMsg);
+                    File.AppendAllText(PassFile,writeMsg);
                 }
             }
         }
