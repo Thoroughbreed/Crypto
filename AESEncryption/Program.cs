@@ -40,8 +40,8 @@ namespace Crypto
                     {
                         Console.WriteLine($"{uiText[i]}:\t{result[i]}");
                     }
-
                     break;
+                
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Lets try to decrypt then...");
@@ -53,6 +53,7 @@ namespace Crypto
                     var text = Console.ReadLine();
                     Console.WriteLine(crypto.Decrypt(key, iv, text));
                     break;
+                
                 case 2:
                     Console.Clear();
                     Console.Write("Please enter passcode: ");
