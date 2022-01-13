@@ -15,11 +15,21 @@ namespace Crypto
         private string _unlockKey = "C97390943929DB556B200656837B778D";
         private string _iv = "E8B48407387C429B681C7BE4211D1860";
 
+        /// <summary>
+        /// Constructor of the Cryptography Class.
+        /// Loads encrypted passwords from file and stores them in memory.
+        /// </summary>
         public CryptoClass()
         {
-            _passwords = new();
+            _passwords = new List<Password>();
             LoadFromFile();
         }
+        
+        /// <summary>
+        /// Generates a random number
+        /// </summary>
+        /// <param name="length">Length in bytes</param>
+        /// <returns>Random number</returns>
         private byte[] GenerateRandomNumber(int length)
         {
             byte[] randomNumber = new byte[length];
@@ -27,6 +37,14 @@ namespace Crypto
             return randomNumber;
         }
 
+        /// <summary>
+        /// This is where the magic happens
+        /// </summary>
+        /// <param name="data">Data</param>
+        /// <param name="key">Encryption key</param>
+        /// <param name="iv">Integration vector</param>
+        /// <param name="encrypt">Encrypt/decrypt (default decrypt)</param>
+        /// <returns>Byte of the en/decrypted data</returns>
         private byte[] Crypto(byte[] data, byte[] key, byte[] iv, bool encrypt = false)
         {
             using var cryptography = Aes.Create();
@@ -41,6 +59,12 @@ namespace Crypto
                 return cryptography.DecryptCbc(data, iv);
             }
         }
+        
+        /// <summary>
+        /// Encrypt a string
+        /// </summary>
+        /// <param name="data">String to be encrypted</param>
+        /// <returns>Encryption key, Integration Vector, Cipher text</returns>
         public string[] Encrypt(string data)
         {
             byte[] key = Convert.FromHexString(_unlockKey);
@@ -54,6 +78,13 @@ namespace Crypto
             return result;
         }
 
+        /// <summary>
+        /// Decrypt a cipher text
+        /// </summary>
+        /// <param name="key">Encryption key (leave blank for own cipher)</param>
+        /// <param name="iv">Integration vector</param>
+        /// <param name="text">Cipher text</param>
+        /// <returns>Decrypted data</returns>
         public string Decrypt(string? key, string iv, string text)
         {
             byte[] k = String.IsNullOrEmpty(key) ? Convert.FromHexString(_unlockKey) : Convert.FromHexString(key);
@@ -63,6 +94,11 @@ namespace Crypto
             return Encoding.UTF8.GetString(decryptedData);
         }
 
+        /// <summary>
+        /// Checks a string via SHA256 if the password matches the predefined one
+        /// </summary>
+        /// <param name="pw">Password string</param>
+        /// <returns>Boolean</returns>
         public bool CheckPassword(string pw)
         {
             var bytes = Encoding.UTF8.GetBytes(pw);
@@ -76,6 +112,12 @@ namespace Crypto
             else return false;
         }
 
+        /// <summary>
+        /// Adds a new password to the vault and saves it to file.
+        /// </summary>
+        /// <param name="hint">A password hint (where)</param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Password</param>
         public void AddPassword(string hint, string username, string password)
         {
             if (!string.IsNullOrEmpty(hint) || !string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
@@ -95,6 +137,10 @@ namespace Crypto
             }
         }
 
+        /// <summary>
+        /// Lists the encrypted passwords (decrypted)
+        /// </summary>
+        /// <returns>Decrypted passwords</returns>
         public List<Password> ListPasswords()
         {
             List<Password> decryptedPasswords = new();
@@ -108,11 +154,17 @@ namespace Crypto
             return decryptedPasswords;
         }
 
+        /// <summary>
+        /// Saves the passwords to file
+        /// </summary>
         public void SaveToFile()
         {
             FileLogger.WriteTo(null, _passwords, false);
         }
 
+        /// <summary>
+        /// Loads the passwords from file
+        /// </summary>
         private void LoadFromFile()
         {
             string[] pwHashes = FileLogger.ReadFrom(false);
@@ -124,12 +176,11 @@ namespace Crypto
                     try
                     {
                         _passwords.Add(new Password(split[0], split[1], split[2]));
-                        // _passwords.Add(new Password(split[0], split[1], split[1]));
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("WTF?!");
                         Console.WriteLine(e.Message);
+                        FileLogger.WriteTo(e.Message, null);
                     }
                 }
             }
