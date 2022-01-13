@@ -925,7 +925,7 @@ namespace Crypto.UTIL
             while (true)
             {
                 // Centers text vertically
-                posY = (_screenHeight - MenuItems.Count) / 2; 
+                posY = (_screenHeight - MenuItems.Count) / 2;
                 foreach (var item in MenuItems)
                 {
                     // Centers text horizontally

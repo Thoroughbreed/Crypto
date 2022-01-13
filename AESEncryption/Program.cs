@@ -7,69 +7,93 @@ namespace Crypto
 {
     class Program
     {
-        private static ASCII MainMenu;
-        private static string original;
+        private static ASCII _mainMenu;
+        private static ASCII _subMenu;
+        private static string _original;
+        private static bool _approved;
+        private static List<Password> _passwords;
+        private static CryptoClass crypto;
 
         static void Main()
         {
             Console.Clear();
             Console.CursorVisible = false;
-            var crypto = new CryptoClass();
-            var key = crypto.GenerateRandomNumber(32);
-            var iv = crypto.GenerateRandomNumber(16);
+            crypto = new CryptoClass();
             ConsoleKeyInfo menuKey;
-            MainMenu = new ASCII(new List<string>
+            _mainMenu = new ASCII(new List<string>
             {
                 "Encrypt",
                 "Decrypt",
+                "Log in",
                 "-- EXIT --"
             });
 
-            switch (MainMenu.Draw())
+            switch (_mainMenu.Draw())
             {
                 case 0:
+                    Console.Clear();
                     Console.Write("Enter secret message: ");
-                    original = Console.ReadLine();
-                    // Console.Write("Enter key cipher");
-                    var result = Encrypt(original, key, iv, crypto);
-                    foreach (var VARIABLE in result)
+                    _original = Console.ReadLine();
+                    var result = crypto.Encrypt(_original);
+                    string[] uiText = new[] { "KEY", "IV", "CIPHER" };
+                    for (int i = 0; i < result.Length; i++)
                     {
-                        Console.WriteLine(VARIABLE);
+                        Console.WriteLine($"{uiText[i]}:\t{result[i]}");
                     }
 
                     break;
                 case 1:
+                    Console.Clear();
                     Console.WriteLine("Lets try to decrypt then...");
-                    var print = Decrypt(
-                        "C7jKInp7Qmc99Gep3YLsQZnT/js/qnXRbFldAPTQDCk=",
-                        "8X7durkBX/De6ASyPFYV6Q==",
-                        "TVcDK8KUr6af1YQJXQeLog==",
-                        crypto);
-                    Console.WriteLine(print);
+                    Console.Write("Please enter key (press enter for none): ");
+                    var key = Console.ReadLine();
+                    Console.Write("Please enter integration vector: ");
+                    var iv = Console.ReadLine();
+                    Console.Write("Please enter cipher text: ");
+                    var text = Console.ReadLine();
+                    Console.WriteLine(crypto.Decrypt(key, iv, text));
+                    break;
+                case 2:
+                    Console.Clear();
+                    Console.Write("Please enter passcode: ");
+                    _approved = crypto.CheckPassword(Console.ReadLine());
+                    if (_approved) LoadSubMenu();
+                    else Console.WriteLine("!WRONG PASSWORD!");
                     break;
                 case 9:
                     break;
             }
+
+            crypto.SaveToFile();
         }
 
-        static string[] Encrypt(string data, byte[] key, byte[] iv, CryptoClass c)
+        static void LoadSubMenu()
         {
-            string[] result =
+            _mainMenu = new ASCII(new List<string>
             {
-                Convert.ToBase64String(key),
-                Convert.ToBase64String(iv),
-                Convert.ToBase64String(c.Crypto(Encoding.UTF8.GetBytes(data), key, iv, true))
-            };
-            return result;
-        }
+                "List passwords",
+                "Add new password",
+                "-- EXIT --"
+            });
 
-        static string Decrypt(string key, string iv, string text, CryptoClass c)
-        {
-            var t = Convert.FromBase64String(text);
-            var k = Convert.FromBase64String(key);
-            var i = Convert.FromBase64String(iv);
-            var decryptedData = c.Crypto(t, k, i);
-            return Encoding.UTF8.GetString(decryptedData);
+            switch (_mainMenu.Draw())
+            {
+                case 0:
+                    foreach (var password in crypto.ListPasswords())
+                    {
+                        Console.WriteLine($"Hint: {password.hint} - Password: {password.password}");
+                    }
+                    break;
+                case 1:
+                    Console.Write("Please type password hint: ");
+                    var hint = Console.ReadLine();
+                    Console.Write("Please type password: ");
+                    var pw = Console.ReadLine();
+                    crypto.AddPassword(hint, pw);
+                    break;
+                case 9:
+                    break;
+            }
         }
     }
 }
