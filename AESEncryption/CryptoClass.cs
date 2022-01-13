@@ -76,11 +76,11 @@ namespace Crypto
             else return false;
         }
 
-        public void AddPassword(string hint, string password)
+        public void AddPassword(string hint, string username, string password)
         {
-            if (!string.IsNullOrEmpty(hint) || !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(hint) || !string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
             {
-                _passwords.Add(new Password(Encrypt(hint)[2], Encrypt(password)[2]));
+                _passwords.Add(new Password(Encrypt(hint)[2], Encrypt(username)[2], Encrypt(password)[2]));
                 SaveToFile();
             }
         }
@@ -91,8 +91,9 @@ namespace Crypto
             foreach (var password in _passwords)
             {
                 var h = Decrypt(_unlockKey, _iv, password.hint);
+                var u = Decrypt(_unlockKey, _iv, password.username);
                 var p = Decrypt(_unlockKey, _iv, password.password);
-                decryptedPasswords.Add(new Password(h, p));
+                decryptedPasswords.Add(new Password(h, u, p));
             }
             return decryptedPasswords;
         }
@@ -104,11 +105,19 @@ namespace Crypto
 
         private void LoadFromFile()
         {
-            string[] _pwHashes = FileLogger.ReadFrom(false);
-            foreach (var password in _pwHashes)
+            string[] pwHashes = FileLogger.ReadFrom(false);
+            if (pwHashes != null)
             {
-                string[] split = password.Split("\t");
-                _passwords.Add(new Password(split[0], split[1]));
+                foreach (var password in pwHashes)
+                {
+                    string[] split = password.Split("\t");
+                    try
+                    {
+                        _passwords.Add(new Password(split[0], split[1], split[2]));
+                    }
+                    catch (Exception e)
+                    { }
+                }
             }
         }
     }

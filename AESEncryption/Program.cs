@@ -88,9 +88,11 @@ namespace Crypto
                 case 1:
                     Console.Write("Please type password hint: ");
                     var hint = Console.ReadLine();
+                    Console.Write("Please type username: ");
+                    var uname = Console.ReadLine();
                     Console.Write("Please type password: ");
                     var pw = Console.ReadLine();
-                    crypto.AddPassword(hint, pw);
+                    crypto.AddPassword(hint, uname,pw);
                     break;
                 case 9:
                     break;
