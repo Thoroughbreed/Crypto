@@ -80,14 +80,7 @@ namespace Crypto
         {
             if (!string.IsNullOrEmpty(hint) || !string.IsNullOrEmpty(password))
             {
-                var h = Crypto(Encoding.UTF8.GetBytes(hint),
-                    Convert.FromHexString(_unlockKey),
-                    Convert.FromHexString(_iv), true);
-                var p = Crypto(Encoding.UTF8.GetBytes(password),
-                    Convert.FromHexString(_unlockKey),
-                    Convert.FromHexString(_iv), true);
-                
-                _passwords.Add(new Password(Convert.ToHexString(h), Convert.ToHexString(p)));
+                _passwords.Add(new Password(Encrypt(hint)[2], Encrypt(password)[2]));
                 SaveToFile();
             }
         }
