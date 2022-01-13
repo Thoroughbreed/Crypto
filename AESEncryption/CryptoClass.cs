@@ -31,6 +31,7 @@ namespace Crypto
         {
             using var cryptography = Aes.Create();
             cryptography.Key = key;
+            cryptography.Padding = PaddingMode.PKCS7;
             if (encrypt)
             {
                 return cryptography.EncryptCbc(data, iv);
