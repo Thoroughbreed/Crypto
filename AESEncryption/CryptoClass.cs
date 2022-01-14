@@ -11,8 +11,12 @@ namespace Crypto
     public class CryptoClass
     {
         private List<Password> _passwords;
+        // SHA256 hashed master-password
         private const string _pwHash = "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8";
+        // The default unlock-key for en-/decryption of messages
         private string _unlockKey = "C97390943929DB556B200656837B778D";
+        // The default i-Vector for en-/decryption of the encrypted List<Password>
+        // It uses the SHA256 hash-hex from a part of the master-password converted to bit as the key
         private string _iv = "E8B48407387C429B681C7BE4211D1860";
 
         /// <summary>
@@ -172,7 +176,7 @@ namespace Crypto
             {
                 foreach (var password in pwHashes)
                 {
-                    string[] split = password.Split("X");
+                    string[] split = password.Split("X"); // Security by obscurity, X is not a HEX char
                     try
                     {
                         _passwords.Add(new Password(split[0], split[1], split[2]));

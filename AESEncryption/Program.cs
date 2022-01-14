@@ -28,7 +28,7 @@ namespace Crypto
             {
                 switch (mainMenu.Draw())
                 {
-                    case 0:
+                    case 0: // Encrypts a message using AES and returns cipher text + unlock key
                         Console.Clear();
                         Console.Write("Enter secret message: ");
                         var result = _crypto.Encrypt(HideInput());
@@ -43,7 +43,7 @@ namespace Crypto
                         Console.ReadKey(true);
                         break;
 
-                    case 1:
+                    case 1: // Decrytps a cipher using AES and supplied key
                         Console.Clear();
                         Console.WriteLine("Lets try to decrypt then...");
                         Console.Write("Please enter key (press enter for none): ");
@@ -68,7 +68,7 @@ namespace Crypto
                         Console.ReadKey(true);
                         break;
 
-                    case 2:
+                    case 2: // Prompts the user for a password and checks that against a SHA256 hash
                         Console.Clear();
                         FileLogger.WriteTo("Login attempt", null);
                         Console.Write("Please enter passcode: ");
@@ -82,10 +82,10 @@ namespace Crypto
                         }
                         break;
 
-                    case 3:
+                    case 3: // Quit the sub menu if selected in menu
                         mainMenuActive = false;
                         break;
-                    case 9:
+                    case 9: // Quit the sub menu if user presses either X or ESC
                         mainMenuActive = false;
                         break;
                 }
@@ -111,7 +111,7 @@ namespace Crypto
             {
                 switch (subMenu.Draw())
                 {
-                    case 0:
+                    case 0: // Read encrypted passwords, decrypt them and list them
                         try
                         {
                             foreach (var password in _crypto.ListPasswords())
@@ -131,7 +131,7 @@ namespace Crypto
                         Console.ReadKey(true);
                         break;
                     
-                    case 1:
+                    case 1: // Add a new password to the vault and encrypt them instantly
                         Console.Write("Please type password hint: ");
                         var hint = Console.ReadLine();
                         Console.Write("Please type username: ");
@@ -154,10 +154,10 @@ namespace Crypto
                         Console.ReadKey(true);
                         break;
                     
-                    case 2:
+                    case 2: // Quit the sub menu if selected in menu
                         subMenuActive = false;
                         break;
-                    case 9:
+                    case 9: // Quit the sub menu if user presses either X or ESC
                         subMenuActive = false;
                         break;
                 }
@@ -173,14 +173,16 @@ namespace Crypto
             StringBuilder input = new();
             while (true)
             {
+                // Take note of current curser position
                 int x = Console.CursorLeft;
                 int y = Console.CursorTop;
-                ConsoleKeyInfo key = Console.ReadKey(true);
+                ConsoleKeyInfo key = Console.ReadKey(true); // Grabs the keyinput without printing it
                 if (key.Key == ConsoleKey.Enter)
                 {
                     Console.WriteLine();
                     break;
                 }
+                // Deletes  if user presses backspace
                 if (key.Key == ConsoleKey.Backspace && input.Length > 0)
                 {
                     input.Remove(input.Length - 1, 1);
@@ -188,11 +190,15 @@ namespace Crypto
                     Console.Write(" ");
                     Console.SetCursorPosition(x - 1, y);
                 }
+                // If somehow you get a key less than 32 ASCII or above 126 ASCII
+                // It intercepts it and logs it in log-file
                 else if( key.KeyChar < 32 || key.KeyChar > 126 )
                 {
                     
                     FileLogger.WriteTo($"Weird input detected - {key.KeyChar}", null);
                 }
+                // All other key-inputs are put into the string
+                // And input is replaced with 
                 else if (key.Key != ConsoleKey.Backspace)
                 {
                     input.Append(key.KeyChar);

@@ -28,7 +28,7 @@ namespace Crypto.UTIL
                 File.WriteAllText(PassFile, writeMsg);
                 foreach (var pw in passwords)
                 {
-                    writeMsg = $"{pw.hint}X{pw.username}X{pw.password}\n";
+                    writeMsg = $"{pw.hint}X{pw.username}X{pw.password}\n"; // Security by obscurity, X is not a HEX char
                     File.AppendAllText(PassFile,writeMsg);
                 }
             }
