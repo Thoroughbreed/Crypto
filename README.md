@@ -22,6 +22,7 @@ When you select log in you'll need to use the master password (which is stored a
 | 0.0.5 | First release, en-/decrypts messages |
 | 0.1.0 | Added simple menu |
 | 0.1.1 | Added login to password vault |
+| 0.2.0 | Added secondary "master password" for decryption |
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Roadmap
@@ -29,7 +30,7 @@ When you select log in you'll need to use the master password (which is stored a
 - [x] Decrypt text using a key and cipher from other source (AES)
 - [x] Make it easily expandable (prepare for web frontend etc.)
 - [x] Create a password vault with secure login
-- [ ] Separate login password and the master password/key (Currently you *can* reverse engineer and decrypt it if you look at the src
+- [x] Separate login password and the master password/key (Currently you *can* reverse engineer and decrypt it if you look at the src
 - [ ] Make a non-console UI
 - [ ] Enable encryption of files (not only text)
 - [ ] Enable "Admin-mode" and the possibility of multiple users (with their own master-key and vault)
