@@ -41,6 +41,7 @@ When you select log in you'll need to use the master password (which is stored a
 * Software: GPLv3
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+Special thanks to Nicolai Heuck for his awesome console-menu :)
 
 ### Contact
 
