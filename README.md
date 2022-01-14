@@ -3,7 +3,7 @@
 [![Issues][issues-shield]][issues-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-# SerialLogger
+# CryptoVault
 
 ### What is this?
 A quite simple but very effective application to create encrypted messages (and decrypt them) together with a strong AES encrypted password vault/manager
