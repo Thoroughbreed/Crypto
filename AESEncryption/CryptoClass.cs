@@ -12,7 +12,6 @@ namespace Crypto
     {
         private List<Password> _passwords;
         // SHA256 hashed master-password
-        // private const string _pwHash = "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8"; // OLD PASSWORD
         private const string _pwHash = "0BA8E1E5A89330ED3F159A67FD6C80AD345048B8CE84242BD0CB08B5C4834550";
         // The default unlock-key for en-/decryption of messages
         private string _unlockKey = "C97390943929DB556B200656837B778D";
@@ -116,6 +115,10 @@ namespace Crypto
             else return false;
         }
 
+        /// <summary>
+        /// Gets the master-password and sets the unlock key
+        /// </summary>
+        /// <param name="unlock">Master-password</param>
         public void SetUnlockKey(string unlock)
         {
             var bytes = Encoding.UTF8.GetBytes(unlock);
