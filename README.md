@@ -33,7 +33,7 @@ When you select log in you'll need to use the master password (which is stored a
 
 Jan Andreasen - [@andreasen_jan](https://twitter.com/andreasen_jan) - jan@tved.it
 
-Project Link: [https://github.com/jaa2019/SerialLogger](https://github.com/jaa2019/Crypto)
+Project Link: [https://github.com/jaa2019/Crypto](https://github.com/jaa2019/Crypto)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
