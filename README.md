@@ -41,7 +41,7 @@ Project Link: [https://github.com/jaa2019/SerialLogger](https://github.com/jaa20
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [build-shield]: https://img.shields.io/badge/Build-succeeded-brightgreen.svg
 [test-shield]: https://img.shields.io/badge/Tests-passing-brightgreen.svg
-[contributors-shield]: https://img.shields.io/badge/Contributors-1-brightgreen.svg
+[contributors-shield]: https://img.shields.io/badge/Contributors-2-brightgreen.svg
 [contributors-url]: https://github.com/jaa2019/SerialLogger/graphs/contributors
 [forks-shield]: https://img.shields.io/badge/Forks-0-blue.svg
 [forks-url]: https://github.com/jaa2019/SerialLogger/network/members
