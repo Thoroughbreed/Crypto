@@ -3,6 +3,7 @@
 [![Issues][issues-shield]][issues-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
+[![License][license-shield]][license-url]
 # CryptoVault
 
 ### What is this?
@@ -45,7 +46,9 @@ Special thanks to [Nicolai Heuck](https://github.com/nicolaiheuck/) for his awes
 
 ### Contact
 
-Jan Andreasen - [@andreasen_jan](https://twitter.com/andreasen_jan) - jan@tved.it
+Jan Andreasen - jan@tved.it
+
+[![Twitter][twitter-shield]][twitter-url]
 
 Project Link: [https://github.com/jaa2019/Crypto](https://github.com/jaa2019/Crypto)
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -55,9 +58,13 @@ Project Link: [https://github.com/jaa2019/Crypto](https://github.com/jaa2019/Cry
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [build-shield]: https://img.shields.io/badge/Build-succeeded-brightgreen.svg
 [test-shield]: https://img.shields.io/badge/Tests-passing-brightgreen.svg
-[contributors-shield]: https://img.shields.io/badge/Contributors-3-brightgreen.svg
+[contributors-shield]: https://img.shields.io/github/contributors/jaa2019/Crypto.svg?style=badge
 [contributors-url]: https://github.com/jaa2019/Crypto/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/Forks-0-blue.svg
+[forks-shield]: https://img.shields.io/github/forks/jaa2019/Crypto.svg?style=badge
 [forks-url]: https://github.com/jaa2019/Crypto/network/members
-[issues-shield]: https://img.shields.io/badge/Issues-1-brightgreen.svg
+[issues-shield]: https://img.shields.io/github/issues/jaa2019/Crypto.svg?style=badge
 [issues-url]: https://github.com/jaa2019/Crypto/issues
+[license-shield]: https://img.shields.io/github/license/jaa2019/Crypto.svg?style=badge
+[license-url]: https://github.com/jaa2019/Crypto/blob/master/LICENSE.txt
+[twitter-shield]: https://img.shields.io/twitter/follow/andreasen_jan?style=social
+[twitter-url]: https://twitter.com/andreasen_jan
