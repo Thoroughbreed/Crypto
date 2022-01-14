@@ -12,7 +12,8 @@ namespace Crypto
     {
         private List<Password> _passwords;
         // SHA256 hashed master-password
-        private const string _pwHash = "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8";
+        // private const string _pwHash = "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8"; // OLD PASSWORD
+        private const string _pwHash = "0BA8E1E5A89330ED3F159A67FD6C80AD345048B8CE84242BD0CB08B5C4834550";
         // The default unlock-key for en-/decryption of messages
         private string _unlockKey = "C97390943929DB556B200656837B778D";
         // The default i-Vector for en-/decryption of the encrypted List<Password>
@@ -110,10 +111,16 @@ namespace Crypto
             var hash = Convert.ToHexString(sha256.ComputeHash(bytes));
             if (hash == _pwHash)
             {
-                _unlockKey = hash;
                 return true;
             }
             else return false;
+        }
+
+        public void SetUnlockKey(string unlock)
+        {
+            var bytes = Encoding.UTF8.GetBytes(unlock);
+            using SHA256 sha256 = SHA256.Create();
+            _unlockKey = Convert.ToHexString(sha256.ComputeHash(bytes));
         }
 
         /// <summary>
@@ -147,15 +154,23 @@ namespace Crypto
         /// <returns>Decrypted passwords</returns>
         public List<Password> ListPasswords()
         {
-            List<Password> decryptedPasswords = new();
-            foreach (var password in _passwords)
+            try
             {
-                var h = Decrypt(_unlockKey, _iv, password.hint);
-                var u = Decrypt(_unlockKey, _iv, password.username);
-                var p = Decrypt(_unlockKey, _iv, password.password);
-                decryptedPasswords.Add(new Password(h, u, p));
+                List<Password> decryptedPasswords = new();
+                foreach (var password in _passwords)
+                {
+                    var h = Decrypt(_unlockKey, _iv, password.hint);
+                    var u = Decrypt(_unlockKey, _iv, password.username);
+                    var p = Decrypt(_unlockKey, _iv, password.password);
+                    decryptedPasswords.Add(new Password(h, u, p));
+                }
+                return decryptedPasswords;
             }
-            return decryptedPasswords;
+            catch (Exception e)
+            {
+                FileLogger.WriteTo(e.Message, null);
+                throw new BadUser();
+            }
         }
 
         /// <summary>

@@ -105,7 +105,9 @@ namespace Crypto
                 "Add new password",
                 "Return to main menu"
             });
-
+            Console.Write("Please enter your master-unlock key: ");
+            _crypto.SetUnlockKey(HideInput());
+            
             bool subMenuActive = true;
             do
             {
@@ -120,11 +122,9 @@ namespace Crypto
                                     $"Hint: {password.hint} - Username: {password.username} - Password: {password.password}");
                             }
                         }
-                        catch (Exception e)
+                        catch (BadUser e)
                         {
-                            Console.WriteLine("Something weird just happened ...");
                             Console.WriteLine(e.Message);
-                            FileLogger.WriteTo(e.Message, null);
                         }
                         
                         Console.WriteLine("Press any key to continue ...");
