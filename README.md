@@ -56,8 +56,8 @@ Project Link: [https://github.com/jaa2019/Crypto](https://github.com/jaa2019/Cry
 [build-shield]: https://img.shields.io/badge/Build-succeeded-brightgreen.svg
 [test-shield]: https://img.shields.io/badge/Tests-passing-brightgreen.svg
 [contributors-shield]: https://img.shields.io/badge/Contributors-3-brightgreen.svg
-[contributors-url]: https://github.com/jaa2019/SerialLogger/graphs/contributors
+[contributors-url]: https://github.com/jaa2019/Crypto/graphs/contributors
 [forks-shield]: https://img.shields.io/badge/Forks-0-blue.svg
-[forks-url]: https://github.com/jaa2019/SerialLogger/network/members
+[forks-url]: https://github.com/jaa2019/Crypto/network/members
 [issues-shield]: https://img.shields.io/badge/Issues-1-brightgreen.svg
-[issues-url]: https://github.com/jaa2019/SerialLogger/issues
+[issues-url]: https://github.com/jaa2019/Crypto/issues
