@@ -24,6 +24,16 @@ When you select log in you'll need to use the master password (which is stored a
 | 0.1.1 | Added login to password vault |
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Roadmap
+- [x] Make a fully functional encryption service
+- [x] Decrypt text using a key and cipher from other source (AES)
+- [x] Make it easily expandable (prepare for web frontend etc.)
+- [x] Create a password vault with secure login
+- [ ] Make a non-console UI
+- [ ] Enable encryption of files (not only text)
+- [ ] Enable "Admin-mode" and the possibility of multiple users (with their own master-key and vault)
+- [ ] Kill all bugs ;)
+
 ### License
 * Software: GPLv3
 <p align="right">(<a href="#top">back to top</a>)</p>
