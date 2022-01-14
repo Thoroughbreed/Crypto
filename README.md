@@ -31,6 +31,7 @@ When you select log in you'll need to use the master password (which is stored a
 - [x] Make it easily expandable (prepare for web frontend etc.)
 - [x] Create a password vault with secure login
 - [x] Separate login password and the master password/key (Currently you *can* reverse engineer and decrypt it if you look at the src
+- [ ] Add function to generate a random (secure-ish) password and add it to vault
 - [ ] Make a non-console UI
 - [ ] Enable encryption of files (not only text)
 - [ ] Enable "Admin-mode" and the possibility of multiple users (with their own master-key and vault)
